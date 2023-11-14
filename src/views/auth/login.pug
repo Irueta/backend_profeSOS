@@ -1,0 +1,13 @@
+extends ../layout
+
+block content 
+    h1 Login 
+    if error 
+        p(class="error")= error
+    form(action="/login", method="post") 
+        label(for="email") Email 
+        input(type="text", name="email", id="email") 
+        label(for="password") Password 
+        input(type="password", name="password", id="password") 
+        input(type="submit", value="send")
+    a(href="/register") Crear usuario 

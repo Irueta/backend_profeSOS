@@ -1,0 +1,8 @@
+block content 
+    h1 Datos del usuario
+        ul 
+            if user
+                li= 'Nombre: '+ user.nombre
+                li='Apellido: '+ user.primer_apellido
+                li='Segundo apellido: '+ user.segundo_apellido
+                li='Email: '+ user.email

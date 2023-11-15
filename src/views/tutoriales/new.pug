@@ -1,0 +1,23 @@
+extends ../layout
+
+block content 
+    h1 Crear tutorial 
+    if error 
+        p(class="error")= error
+    form(action="/tutoriales/new" method="post")
+        label(for="tema") Tema:
+        select(name="tema" id="tema")
+            each tema in temas
+                option(value=tema.idTema) #{tema.nombre}
+            option(value="nuevo") Nuevo tema
+        input(type="text" name="nuevoTema" id="nuevoTema" placeholder="Introduce un nuevo tema")
+        label(for="nombre") Título
+        input(type="text", name="nombre", id="nombre")
+        abel(for="descripcion") Descripción
+        input(type="text", name="descripcion", id="descripcion")
+        abel(for="repositorio") Repositorio
+        input(type="text", name="repositorio", id="repositorio")
+        button(type="submit") Crear Tutorial
+
+    a(href="/tutoriales") Volver a tutoriales
+        

@@ -1,0 +1,13 @@
+html
+  head
+    title Tutoriales
+
+  body
+    each tutorial in tutoriales
+      .tutorial
+        h2= tutorial.titulo
+        p= tutorial.descripcion
+        p Tema: #{tutorial.tema}
+        p Autor: #{tutorial.autor}
+        p Total de Votos: #{tutorial.totalVotos}
+        hr

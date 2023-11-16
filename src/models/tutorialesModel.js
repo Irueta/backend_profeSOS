@@ -2,19 +2,16 @@ import connection from "../config/mysql.js";
 
 
 const findAll= async ()=>{
-    const queryString = "SELECT tutoriales.nombre AS titulo, tutoriales.descripcion, temas.nombre AS tema, CONCAT(usuarios.nombre,' ', usuarios.apellido) AS autor, COUNT(votos.idTutorial) AS totalVotos FROM tutoriales JOIN temas ON tutoriales.idTema = temas.idTema JOIN usuarios ON usuarios.idUsuario = tutoriales.idAutor LEFT JOIN votos ON votos.idTutorial = tutoriales.idTutorial GROUP BY tutoriales.idTutorial, tutoriales.nombre, tutoriales.descripcion, temas.nombre, usuarios.nombre, usuarios.apellido;";
+    const queryString = "SELECT tutoriales.nombre AS titulo, tutoriales.descripcion, temas.nombre AS tema, CONCAT(usuarios.nombre,' ', usuarios.apellido) AS autor, COUNT(votos.idTutorial) AS totalVotos FROM tutoriales JOIN temas ON tutoriales.idTema = temas.idTema JOIN usuarios ON usuarios.idUsuario = tutoriales.idAutor LEFT JOIN votos ON votos.idTutorial = tutoriales.idTutorial GROUP BY tutoriales.idTutorial, tutoriales.nombre, tutoriales.descripcion, temas.nombre, usuarios.nombre, usuarios.apellido ORDER BY totalVotos DESC;";
     const [rows,fields] = await connection.query(queryString);
     console.log(rows);
     console.log(fields);
     return rows;
 }
 
-const findAllBuscador=async ()=>{
-    const titulo=req.body.titulo;
-    const tema=req.body.tema;
-    const descripcion=req.body.descripcion;
-    const autor=req.body.auto;
-    const queryString = `SELECT tutoriales.nombre AS titulo, tutoriales.descripcion, temas.nombre AS nombre_tema, CONCAT(usuarios.nombre, ' ', usuarios.apellido) AS autor, COUNT(votos.idTutorial) AS totalVotos FROM tutoriales JOIN temas ON tutoriales.idTema = temas.idTema JOIN usuarios ON usuarios.idUsuario = tutoriales.idAutor LEFT JOIN votos ON votos.idTutorial = tutoriales.idTutorial WHERE tutoriales.nombre LIKE '%${titulo}%' OR tutoriales.descripcion LIKE '%${tema}%' OR temas.nombre LIKE '%${descripcion}%' OR CONCAT(usuarios.nombre, ' ', usuarios.apellido) LIKE '%${autor}%' GROUP BY tutoriales.idTutorial, tutoriales.nombre, tutoriales.descripcion, temas.nombre, usuarios.nombre, usuarios.apellido;`;
+const findAllBuscador=async (titulo,tema,descripcion,autor)=>{
+   /*  const {titulo,tema,descripcion,autor}=req.body; */
+    const queryString = `SELECT tutoriales.nombre AS titulo, tutoriales.descripcion, temas.nombre AS nombre_tema, CONCAT(usuarios.nombre, ' ', usuarios.apellido) AS autor, COUNT(votos.idTutorial) AS totalVotos FROM tutoriales JOIN temas ON tutoriales.idTema = temas.idTema JOIN usuarios ON usuarios.idUsuario = tutoriales.idAutor LEFT JOIN votos ON votos.idTutorial = tutoriales.idTutorial WHERE tutoriales.nombre LIKE '%${titulo}%' AND tutoriales.descripcion LIKE '%${tema}%' AND temas.nombre LIKE '%${descripcion}%' AND CONCAT(usuarios.nombre, ' ', usuarios.apellido) LIKE '%${autor}%' GROUP BY tutoriales.idTutorial, tutoriales.nombre, tutoriales.descripcion, temas.nombre, usuarios.nombre, usuarios.apellido ORDER BY totalVotos DESC;`;
     const [rows,fields] = await connection.query(queryString);
     return rows;
 }
@@ -35,7 +32,7 @@ const findByAutor = async (email) =>{
     const [rows,fields] = await connection.query(queryString,[email]);
     console.log(rows);
     console.log(fields);
-    return rows[0];
+    return rows;
 } 
 
 

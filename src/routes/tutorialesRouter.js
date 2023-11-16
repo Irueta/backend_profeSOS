@@ -25,5 +25,13 @@ router.post("/new",(req,res)=>{
     tutorialesViewController.create(req,res);
 });
 
+router.get("/search",(req,res)=>{
+    tutorialesViewController.buscadorForm(req,res);
+});
+
+router.post("/search",(req,res)=>{
+    tutorialesViewController.buscadorList(req,res);
+});
+
 
 export default router;

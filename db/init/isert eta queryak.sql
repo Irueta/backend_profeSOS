@@ -67,7 +67,33 @@ LEFT JOIN votos ON votos.idTutorial = tutoriales.idTutorial
 GROUP BY tutoriales.idTutorial, tutoriales.nombre, tutoriales.descripcion, temas.nombre, usuarios.nombre, usuarios.apellido;
 
 
-
+//tutoriales por autor
 select * from tutoriales
 join usuarios on idAutor=idUsuario
 where email="ane.martinez@example.com";
+
+
+//buscador;
+SELECT 
+    tutoriales.nombre AS titulo,
+    tutoriales.descripcion,
+    temas.nombre AS nombre_tema,
+    CONCAT(usuarios.nombre, ' ', usuarios.apellido) AS autor,
+    COUNT(votos.idTutorial) AS totalVotos
+FROM tutoriales
+JOIN temas ON tutoriales.idTema = temas.idTema
+JOIN usuarios ON usuarios.idUsuario = tutoriales.idAutor
+LEFT JOIN votos ON votos.idTutorial = tutoriales.idTutorial
+WHERE 
+    tutoriales.nombre LIKE '%a%'
+    AND tutoriales.descripcion LIKE '%f%'
+    OR temas.nombre LIKE '%%'
+    OR CONCAT(usuarios.nombre, ' ', usuarios.apellido) LIKE '%%'
+GROUP BY tutoriales.idTutorial, tutoriales.nombre, tutoriales.descripcion, temas.nombre, usuarios.nombre, usuarios.apellido;
+
+
+
+SELECT tutoriales.nombre AS titulo, tutoriales.descripcion, temas.nombre AS nombre_tema, CONCAT(usuarios.nombre, ' ', usuarios.apellido) AS autor, COUNT(votos.idTutorial) AS totalVotos FROM tutoriales JOIN temas ON tutoriales.idTema = temas.idTema JOIN usuarios ON usuarios.idUsuario = tutoriales.idAutor LEFT JOIN votos ON votos.idTutorial = tutoriales.idTutorial WHERE tutoriales.nombre LIKE '%%' OR tutoriales.descripcion LIKE '%%' OR temas.nombre LIKE '%%' OR CONCAT(usuarios.nombre, ' ', usuarios.apellido) LIKE '%%' GROUP BY tutoriales.idTutorial, tutoriales.nombre, tutoriales.descripcion, temas.nombre, usuarios.nombre, usuarios.apellido;
+
+SELECT idTema FROM temas WHERE nombre="saf";
+select * from tutoriales join usuarios on idAutor=idUsuario where email="1@1";

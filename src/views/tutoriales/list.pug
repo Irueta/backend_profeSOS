@@ -3,11 +3,14 @@ html
     title Tutoriales
 
   body
+    a(href="/tutoriales/search") Utilizar buscador
+    a(href="/users/${req.session.user.id}") Mi perfil
     each tutorial in tutoriales
       .tutorial
         h2= tutorial.titulo
         p= tutorial.descripcion
         p Tema: #{tutorial.tema}
         p Autor: #{tutorial.autor}
-        p Total de Votos: #{tutorial.totalVotos}
+        p Total de likes: #{tutorial.totalVotos}
+        button Like
         hr

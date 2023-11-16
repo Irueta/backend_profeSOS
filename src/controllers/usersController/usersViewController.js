@@ -40,13 +40,14 @@ const updateForm = async(req,res) =>{
 
 
 const myUpdateForm = async(req,res) =>{
-    const id = req.session.user.id;
+    console.log(req.session.user)
+    const id = req.session.user.idUsuario;
     const idLink=req.params.id;
     if (id ==idLink || id==1){
         const usuario = await usersController.getById(id);
-        /* res.render("users/edit",usuario); */
-        console.log("USUARIO LOGEADO", req.session.user)
-        res.json(usuario)
+        res.render("users/edit",usuario);
+/*         console.log("USUARIO LOGEADO", req.session.user)
+        res.json(usuario) */
     }
 }
 

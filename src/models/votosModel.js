@@ -1,8 +1,8 @@
 import connection from "../config/mysql.js";
 
-const create = async(data) =>{
+const votar = async(idUsuario,idTutorial,idAutor) =>{
     let queryString = "INSERT INTO votos (idUsuario,idTutorial,IdAutor) VALUES (?,?,?);";
-    const [rows,fields] = await connection.query(queryString,[data.idUsuario, data.idTutorial, data.idAutor]);
+    const [rows,fields] = await connection.query(queryString,[idUsuario, idTutorial, idAutor]);
     console.log("rows",rows);
     console.log("fields",fields);
     return rows;
@@ -27,7 +27,7 @@ const findVotado = async(idUsuario,IdTutorial)=>{
 }
 
 export default{
-    create,
+    votar,
     remove,
     findVotado
 }

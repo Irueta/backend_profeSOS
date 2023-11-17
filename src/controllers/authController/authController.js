@@ -19,7 +19,7 @@ const login = async(req,res) => {
                 apellido:user.apellido
             }
             if (req.session.user.id !== 1){
-                res.redirect(`/users/${req.session.user.id}`);
+                res.redirect(`/tutoriales/misTutos`);
                 } else{
                     res.redirect("/users");
                 }

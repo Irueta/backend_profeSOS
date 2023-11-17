@@ -28,9 +28,9 @@ const findByEmail = async (email) =>{
 
 
 
-const update = async(data,pk) =>{
-    let queryString = "UPDATE usuarios SET nombre=?, apellido=?, password=? WHERE idUsuario=?;";
-    const [rows,fields] = await connection.query(queryString,[data.nombre,data.apellido,data.password,pk]);
+const update = async(nombre,apellido,password,idUsuario) =>{
+    let queryString = `UPDATE usuarios SET nombre="${nombre}", apellido="${apellido}", password="${password}" WHERE idUsuario="${idUsuario}";`;
+    const [rows,fields] = await connection.query(queryString,[nombre,apellido,password,idUsuario]);
     console.log("rows",rows);
     console.log("fields",fields);
     return rows;

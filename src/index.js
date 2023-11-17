@@ -15,6 +15,17 @@ app.use(session({
         maxAge: 1000 * 60 * 20
     }
 }))
+
+app.use(express.static("public"))
+
+
+app.use(function(req,res,next){
+    res.locals.session = req.session;
+    next();
+})
+
+
+
 app.set('views', './src/views');
 app.set('view engine', 'pug');
 

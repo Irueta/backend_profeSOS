@@ -2,14 +2,16 @@ import usersController from "./usersController.js";
 
  const getAll = async (req,res) =>{
     const usuarios = await usersController.getAll();
-    res.json(usuarios);
-    /* res.render("users/list",usuarios) */
+    /* res.json(usuarios); */
+    res.render("users/list",{usuarios})
 }
 
 const getById = async (req,res) =>{
     const id = req.params.id;
     const usuario = await usersController.getById(id);
-    res.json(usuario)
+    /* res.json(usuario) */
+    console.log("ESTE ES EL USUARIO",usuario)
+    res.render("users/show",{usuario})
 }
 
 const createForm = (req,res)=>{
@@ -40,8 +42,8 @@ const updateForm = async(req,res) =>{
 
 
 const myUpdateForm = async(req,res) =>{
-    console.log(req.session.user)
-    const id = req.session.user.idUsuario;
+    console.log("USUARIO PARA UPDATE",req.session.user)
+    const id = req.session.user.id;
     const idLink=req.params.id;
     if (id ==idLink || id==1){
         const usuario = await usersController.getById(id);
@@ -54,12 +56,9 @@ const myUpdateForm = async(req,res) =>{
 
 const update = async(req,res) =>{
     const id = req.params.id;
-    const {nombre,apellido,password} = req.body;
-    const usuario = await usuariosController.update(id,nombre,apellido,password);
-    if(error){
-        const uriError = encodeURIComponent(error);
-        return res.redirect(`/users/${id}/edit?error=${uriError}`)
-    }
+    const {nombre,apellido,password,passwordConfirm} = req.body;
+    console.log("PARA USERUPDATE", req.body)
+    const usuario = await usersController.update(nombre,apellido,password,passwordConfirm);
     res.redirect(`/users/${id}`);
 };
 

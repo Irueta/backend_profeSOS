@@ -7,8 +7,8 @@ import authController from "../controllers/authController/authController.js";
 
 const router = express.Router({ mergeParams: true });
 
-router.use("/users",usersRouter);
+router.use("/users",authController.isAdmin,usersRouter);
 router.use("/",authRouter);
-router.use("/tutoriales",tutorialesRouter);
+router.use("/tutoriales",authController.isAdmin,tutorialesRouter);
 
 export default router;

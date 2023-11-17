@@ -1,0 +1,26 @@
+html 
+    head 
+        title PROFES SOS
+        link(rel="stylesheet" href="../../css/style.css")
+
+    body 
+        nav 
+            a(href="/") Home
+            a(href="/tutoriales/search") Buscar
+            a(href="/tutoriales/misTutos") Mis tutoriales
+            a(href="/login") Login
+            a(href="/logout") Logout
+        h1 Dale amor
+                h2= nombre
+                p= descripcion
+                a(href=repositorio)
+                    p Repositorio 
+                form(action='/tutoriales/'+idTutorial+'/show', method="post")
+                    label(for="idTutorial")
+                    input(type="hidden" name="idTutorial", id="idTutorial", value=idTutorial)
+                    label(for="idAutor")
+                    input(type="hidden", name="idAutor", id="idAutor", value=idAutor)
+                    label(for="idUsuario")
+                    input(type="hidden", name="idUsuario", id="idUsuario", value=session.user.id)
+                    input(type="submit", value="Dale amor")
+                hr

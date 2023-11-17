@@ -20,7 +20,13 @@ router.post("/",(req,res)=>{
     usersViewController.create(req,res);
 });
 
-router.get("/:id/edit", usersViewController.myUpdateForm);
+router.get("/:id/edit", (req,res)=>{
+    usersViewController.myUpdateForm(req,res); 
+});
+
+router.get("/:id/edit", (req,res)=>{
+    usersViewController.update(req,res); 
+});
 
 router.post("/:id",(req,res)=>{
     usersViewController.update(req,res);

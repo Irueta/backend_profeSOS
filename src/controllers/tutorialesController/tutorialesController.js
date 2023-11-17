@@ -12,8 +12,8 @@ const getAll = async() => {
 
 const getMisTutos = async(req,res)=>{
         try{
-            const email = req.session.user.email
-            const misTutos= await tutorialesModel.findByAutor(email)
+            const autor = req.session.user.id
+            const misTutos= await tutorialesModel.findByAutor(autor)
             if(misTutos == undefined){
                 res.json("Todavia no has creado ningún tutorial")
             }
@@ -32,9 +32,19 @@ const getByBuscador = async(req,res)=>{
     }
 }
 
+const getFavoritos = async(req,res)=>{
+    const usuario=req.session.user.id;
+    try{
+        const favoritos = await tutorialesModel.findByLiked(usuario)
+    }catch(e){
+        console.log(e)
+    }
+}
+
 const getById = async (id) => {
     try {
         const tutorial = await tutorialesModel.findByPk(id);
+        console.log("AUKERATUTAKUN BILE",tutorial)
         return tutorial;
     }
     catch (e) {
@@ -103,5 +113,6 @@ export default {
     remove,
     create,
     getMisTutos,
-    getByBuscador
+    getByBuscador,
+    getFavoritos
 };

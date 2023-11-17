@@ -35,8 +35,8 @@ const create = async (nombre,apellido,email,password) => {
     }
 }
 
-const update = async(req,res) => {
-        const {nombre,apellido,password,passwordConfirm} = req.body;
+const update = async(nombre,apellido,password,passwordConfirm) => {
+    const id=req.session.user.id    
         if(password !== passwordConfirm){
             const errorUri = encodeURIComponent("Las contraseñas no coinciden");
             return res.redirect("/register?error=" + errorUri);
@@ -54,8 +54,8 @@ const update = async(req,res) => {
                 const hash = await bcrypt.hash(password,10);
                 user.password=hash
         }
-        user.save();
-        return [null,user];
+        await usersModel.update(nombre,apellido,password,id)
+        return res.redirect(`/users/${id}`);
     }
     catch (e) {
         console.log(e)

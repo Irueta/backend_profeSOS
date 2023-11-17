@@ -1,8 +1,17 @@
-extends ../layout
+html 
+    head 
+        title PROFES SOS
+        link(rel="stylesheet" href="../../css/style.css")
 
-block content 
-    h1 Lista de usuarios
-        ul 
-            each usuario in usuarios
-                li
-                    a(href=`/users/${usuario.idUsuario}`)= usuario.nombre +', '+ usuario.apellido+', '+ usuario.email
+    body 
+        nav 
+            a(href="/") Home
+            a(href="/tutoriales/search") Buscar
+            a(href="/tutoriales/misTutos") Mis tutoriales
+            a(href="/login") Login
+            a(href="/logout") Logout
+        h1 Lista de usuarios
+            ul 
+                each usuario in usuarios
+                    li
+                        a(href='/users/'+usuario.idUsuario)= usuario.nombre +', '+ usuario.apellido+', '+ usuario.email

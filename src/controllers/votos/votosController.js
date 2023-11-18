@@ -7,9 +7,13 @@ const crearVoto = async (req,res)=>{
     const idAutor=req.body.idAutor;
     try{
         const hasVotado=await votosModel.findVotado(idUsuario, idTutorial);
-        console.log("HASVOTADO",hasVotado)
         if(hasVotado!==null){
-        return res.redirect("/tutoriales/misTutos");
+            //throw new Error("credenciales incorrectas");
+            const errorUri = encodeURIComponent("credenciales incorrectas");
+            return res.redirect("/login?error="+errorUri);
+            const error="No puedes dar amor al mismo tutorial más de una vez"
+            const uriError = encodeURIComponent(error);
+            return res.redirect(`/tutoriales/search?error=${uriError}`)
         }
         const darLike= await votosModel.votar(idUsuario, idTutorial, idAutor);
         return res.redirect("/tutoriales/search");

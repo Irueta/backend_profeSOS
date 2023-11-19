@@ -8,26 +8,29 @@ html
             a(href="/") Home
             a(href="/tutoriales/search") Buscar
             a(href="/tutoriales/misTutos") Mis tutoriales
-            a(href="/login") Login
-            a(href="/logout") Logout
-        h1 Crear tutorial 
-        if error 
-            p(class="error")= error
-        form(action="/tutoriales/new" method="post")
-            label(for="tema") Tema:
-            select(name="tema" id="tema")
-                option(value=null, selected)
-                    each tema in temas
-                        option(value=tema.idTema) #{tema.nombre}
-                option(value="nuevo") Nuevo tema
-            input(type="text" name="nuevoTema" id="nuevoTema" placeholder="Introduce un nuevo tema")
-            label(for="nombre") Título
-            input(type="text", name="nombre", id="nombre")
-            abel(for="descripcion") Descripción
-            input(type="text", name="descripcion", id="descripcion")
-            abel(for="repositorio") Repositorio
-            input(type="text", name="repositorio", id="repositorio")
-            button(type="submit") Crear Tutorial
+            if !session.user
+                a(href="/login") Login
+            else 
+                a(href="/logout") Logout
+        section
+            h1 Crear tutorial 
+            if error 
+                p(class="error")= error
+            form(action="/tutoriales/new" method="post")
+                label(for="tema") Tema:
+                select(name="tema" id="tema")
+                    option(value=null, selected)
+                        each tema in temas
+                            option(value=tema.idTema) #{tema.nombre}
+                    option(value="nuevo") Nuevo tema
+                input(type="text" name="nuevoTema" id="nuevoTema" placeholder="Introduce un nuevo tema")
+                label(for="nombre") Título
+                input(type="text", name="nombre", id="nombre")
+                abel(for="descripcion") Descripción
+                input(type="text", name="descripcion", id="descripcion")
+                abel(for="repositorio") Repositorio
+                input(type="text", name="repositorio", id="repositorio")
+                button(type="submit") Crear Tutorial
 
-        a(href="/tutoriales/search") Volver a tutoriales
+            a(href="/tutoriales/search") Volver a tutoriales
             

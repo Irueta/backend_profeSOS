@@ -7,10 +7,7 @@ const crearVoto = async (req,res)=>{
     const idAutor=req.body.idAutor;
     try{
         const hasVotado=await votosModel.findVotado(idUsuario, idTutorial);
-        if(hasVotado!==null){
-            //throw new Error("credenciales incorrectas");
-            const errorUri = encodeURIComponent("credenciales incorrectas");
-            return res.redirect("/login?error="+errorUri);
+        if(hasVotado.length !== 0){;
             const error="No puedes dar amor al mismo tutorial más de una vez"
             const uriError = encodeURIComponent(error);
             return res.redirect(`/tutoriales/search?error=${uriError}`)

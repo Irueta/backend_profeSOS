@@ -8,16 +8,19 @@ html
             a(href="/") Home
             a(href="/tutoriales/search") Buscar
             a(href="/tutoriales/misTutos") Mis tutoriales
-            a(href="/login") Login
-            a(href="/logout") Logout
-        h1 Editar Usuario
-            form(action='/users/'+session.user.id, method="post")
-                label(for="nombre") Nombre:
-                input(type="text", name="nombre", id="nombre", value=session.user.nombre )
-                label(for="apellido") Apellido:
-                input(type="text", name="apellido", id="apellido", value=session.user.apellido )
-                label(for="password") Contraseña del usuario: 
-                input(type="password", name="password", placeholder="Contraseña")
-                label(for="passwordConfirm") Confirmar contraseña: 
-                input(type="passwordConfirm", name="passwordConfirm", placeholder="Confirmar contraseña")
-                input(type="submit", value="guardar")
+            if !session.user
+                a(href="/login") Login
+            else 
+                a(href="/logout") Logout
+        section
+            h1 Editar Usuario
+                form(action='/users/'+session.user.id, method="post")
+                    label(for="nombre") Nombre:
+                    input(type="text", name="nombre", id="nombre", value=session.user.nombre )
+                    label(for="apellido") Apellido:
+                    input(type="text", name="apellido", id="apellido", value=session.user.apellido )
+                    label(for="password") Contraseña del usuario: 
+                    input(type="password", name="password", placeholder="Contraseña")
+                    label(for="passwordConfirm") Confirmar contraseña: 
+                    input(type="passwordConfirm", name="passwordConfirm", placeholder="Confirmar contraseña")
+                    input(type="submit", value="guardar")

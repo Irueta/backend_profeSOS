@@ -8,18 +8,22 @@ html
             a(href="/") Home
             a(href="/tutoriales/search") Buscar
             a(href="/tutoriales/misTutos") Mis tutoriales
-            a(href="/login") Login
-            a(href="/logout") Logout
-        h1 Mis tutoriales
-        a(href='/users/'+session.user.id) Mi perfil 
-        a(href='/tutoriales/new') Crear tutorial 
-        each tutorial in misTutoriales
-            a(href='/tutoriales/'+tutorial.idTutorial+'/show')
-                h2= tutorial.titulo
-            p= tutorial.descripcion
-            p Tema: #{tutorial.nombre_tema}
-            a(href=tutorial.repositorio, target="_blank")
-                p Repositorio 
-            p Autor: #{tutorial.autor}
-            p Total de likes: #{tutorial.totalVotos}
-            hr
+            if !session.user
+                a(href="/login") Login
+            else
+                a(href="/logout") Logout
+        section
+            h1 Mis tutoriales
+            a(href='/users/'+session.user.id) Mi perfil 
+            a(href='/tutoriales/new') Crear tutorial 
+            each tutorial in misTutoriales
+                .tutorial
+                    a(href='/tutoriales/'+tutorial.idTutorial+'/show')
+                        h2= tutorial.titulo
+                    p= tutorial.descripcion
+                    p Tema: #{tutorial.nombre_tema}
+                    a(href=tutorial.repositorio, target="_blank")
+                        p Repositorio 
+                    p Autor: #{tutorial.autor}
+                    p Total de likes: #{tutorial.totalVotos}
+                    hr

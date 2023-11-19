@@ -20,9 +20,7 @@ router.get("/:id/show",(req,res)=>{
 });
 
 router.post("/:id/show",async (req,res)=>{
-    console.log("REQ BODY VOTO",req.body)
     const voto = await votosController.crearVoto(req,res);
-    console.log("ESTE ES MI VOTO",voto)
 });
 
 router.get("/misTutos",(req,res)=>{

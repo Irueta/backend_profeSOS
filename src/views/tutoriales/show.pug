@@ -8,19 +8,22 @@ html
             a(href="/") Home
             a(href="/tutoriales/search") Buscar
             a(href="/tutoriales/misTutos") Mis tutoriales
-            a(href="/login") Login
-            a(href="/logout") Logout
-        h1 Dale amor
-                h2= nombre
-                p= descripcion
-                a(href=repositorio, target="_blank")
-                    p Repositorio 
-                form(action='/tutoriales/'+idTutorial+'/show', method="post")
-                    label(for="idTutorial")
-                    input(type="hidden" name="idTutorial", id="idTutorial", value=idTutorial)
-                    label(for="idAutor")
-                    input(type="hidden", name="idAutor", id="idAutor", value=idAutor)
-                    label(for="idUsuario")
-                    input(type="hidden", name="idUsuario", id="idUsuario", value=session.user.id)
-                    input(type="submit", value="Dale amor")
-                hr
+            if !session.user
+                a(href="/login") Login
+            else 
+                a(href="/logout") Logout
+        section
+            h1 Dale amor
+                    h2= nombre
+                    p= descripcion
+                    a(href=repositorio, target="_blank")
+                        p Repositorio 
+                    form(action='/tutoriales/'+idTutorial+'/show', method="post")
+                        label(for="idTutorial")
+                        input(type="hidden" name="idTutorial", id="idTutorial", value=idTutorial)
+                        label(for="idAutor")
+                        input(type="hidden", name="idAutor", id="idAutor", value=idAutor)
+                        label(for="idUsuario")
+                        input(type="hidden", name="idUsuario", id="idUsuario", value=session.user.id)
+                        input(type="submit", value="Dale amor")
+                    hr

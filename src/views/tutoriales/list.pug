@@ -8,17 +8,20 @@ html
             a(href="/") Home
             a(href="/tutoriales/search") Buscar
             a(href="/tutoriales/misTutos") Mis tutoriales
-            a(href="/login") Login
-            a(href="/logout") Logout
-        h1 Tutoriales
-        a(href="/tutoriales/search") Utilizar buscador
-        a(href="/users/${req.session.user.id}") Mi perfil
-        each tutorial in tutoriales
-          .tutorial
-            h2= tutorial.titulo
-            p= tutorial.descripcion
-            p Tema: #{tutorial.tema}
-            p Autor: #{tutorial.autor}
-            p Total de likes: #{tutorial.totalVotos}
-            button Like
-            hr
+            if !session.user
+                a(href="/login") Login
+            else 
+                a(href="/logout") Logout
+        section
+            h1 Tutoriales
+            a(href="/tutoriales/search") Utilizar buscador
+            a(href="/users/${req.session.user.id}") Mi perfil
+            each tutorial in tutoriales
+            .tutorial
+                h2= tutorial.titulo
+                p= tutorial.descripcion
+                p Tema: #{tutorial.tema}
+                p Autor: #{tutorial.autor}
+                p Total de likes: #{tutorial.totalVotos}
+                button Like
+                hr

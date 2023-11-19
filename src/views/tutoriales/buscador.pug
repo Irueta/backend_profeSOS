@@ -8,34 +8,37 @@ html
             a(href="/") Home
             a(href="/tutoriales/search") Buscar
             a(href="/tutoriales/misTutos") Mis tutoriales
-            a(href="/login") Login
-            a(href="/logout") Logout
-        h1 Buscar tutorial 
-        a(href='/tutoriales/new') Crear nuevo tutorial
-        if error 
-            p(class="error")= error
-        form(action="/tutoriales/search" method="get")
-            label(for="tema") Tema:
-            select(name="tema" id="tema")
-                option(value=null, selected)
-                    each tema in temas
-                        option(value=tema.idTema) #{tema.nombre}
-            label(for="titulo") Título
-            input(type="text", name="titulo", id="titulo")
-            label(for="autor") Autor
-            input(type="text", name="autor", id="autor")
-            label(for="descripcion") Descripción
-            input(type="text", name="descripcion", id="descripcion")
-            button(type="submit") Buscar
-            
-            each tutorial in tutoriales
-                .tutorial
-                    a(href='/tutoriales/'+tutorial.idTutorial+'/show')
-                        h2= tutorial.titulo
-                    p= tutorial.descripcion
-                    p Tema: #{tutorial.nombre_tema}
-                    a(href=tutorial.repositorio, target="_blank")
-                        p Repositorio 
-                    p Autor: #{tutorial.autor}
-                    p Total de likes: #{tutorial.totalVotos}
-                    hr
+            if !session.user
+                a(href="/login") Login
+            else
+                a(href="/logout") Logout
+        section
+            h1 Buscar tutorial 
+            a(href='/tutoriales/new') Crear nuevo tutorial
+            if error 
+                p(class="error")= error
+            form(action="/tutoriales/search" method="get")
+                label(for="tema") Tema:
+                select(name="tema" id="tema")
+                    option(value=null, selected)
+                        each tema in temas
+                            option(value=tema.idTema) #{tema.nombre}
+                label(for="titulo") Título
+                input(type="text", name="titulo", id="titulo")
+                label(for="autor") Autor
+                input(type="text", name="autor", id="autor")
+                label(for="descripcion") Descripción
+                input(type="text", name="descripcion", id="descripcion")
+                button(type="submit") Buscar
+                
+                each tutorial in tutoriales
+                    .tutorial
+                        a(href='/tutoriales/'+tutorial.idTutorial+'/show')
+                            h2= tutorial.titulo
+                        p= tutorial.descripcion
+                        p Tema: #{tutorial.nombre_tema}
+                        a(href=tutorial.repositorio, target="_blank")
+                            p Repositorio 
+                        p Autor: #{tutorial.autor}
+                        p Total de likes: #{tutorial.totalVotos}
+                        hr

@@ -8,8 +8,10 @@ html
             a(href="/") Home
             a(href="/tutoriales/search") Buscar
             a(href="/tutoriales/misTutos") Mis tutoriales
-            a(href="/login") Login
-            a(href="/logout") Logout
+            if !session.user
+                a(href="/login") Login
+            else 
+                a(href="/logout") Logout
         
         block content
 

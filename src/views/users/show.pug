@@ -8,14 +8,17 @@ html
             a(href="/") Home
             a(href="/tutoriales/search") Buscar
             a(href="/tutoriales/misTutos") Mis tutoriales
-            a(href="/login") Login
-            a(href="/logout") Logout
-        h1 Datos del usuario
-            ul 
-                if usuario
-                    li= 'Nombre: '+ usuario.nombre
-                    li='Apellido: '+ usuario.primer_apellido
-                    li='Segundo apellido: '+ usuario.segundo_apellido
-                    li='Email: '+ usuario.email
-        a(href='/users/'+session.user.id+'/edit') Editar perfil
-        a(href="/tutoriales/misTutos") Mis tutoriales
+            if !session.user
+                a(href="/login") Login
+            else 
+                a(href="/logout") Logout
+        section(id="userShow")
+            h1 Datos del usuario
+                ul 
+                    if usuario
+                        li= 'Nombre: '+ usuario.nombre
+                        li='Apellido: '+ usuario.primer_apellido
+                        li='Segundo apellido: '+ usuario.segundo_apellido
+                        li='Email: '+ usuario.email
+            a(href='/users/'+session.user.id+'/edit') Editar perfil
+            a(href="/tutoriales/misTutos") Mis tutoriales

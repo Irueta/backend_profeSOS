@@ -42,6 +42,11 @@ const loginForm = (req,res) => {
 const register = async(req,res) => {
     const {nombre,apellido,email,password,passwordConfirm} = req.body;
     console.log(req.body);
+    const emailRegex = /^[^\s@]+@[^\s@]+.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      const errorUri = encodeURIComponent("El formato del correo electrónico no es válido");
+      return res.redirect("/register?error=" + errorUri);
+    }
     if(!nombre || !apellido || !email || !password || !passwordConfirm){
         const errorUri = encodeURIComponent("Todos los campos son obligatorios");
         return res.redirect("/register?error=" + errorUri);

@@ -17,8 +17,7 @@ html
                 ul 
                     if usuario
                         li= 'Nombre: '+ usuario.nombre
-                        li='Apellido: '+ usuario.primer_apellido
-                        li='Segundo apellido: '+ usuario.segundo_apellido
+                        li='Apellido: '+ usuario.apellido
                         li='Email: '+ usuario.email
             a(href='/users/'+session.user.id+'/edit') Editar perfil
             a(href="/tutoriales/misTutos") Mis tutoriales

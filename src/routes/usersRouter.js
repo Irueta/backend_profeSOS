@@ -11,8 +11,9 @@ router.get("/",(req,res)=>{
 
 router.get("/new",usersViewController.createForm);
 
-router.get("/:id",(req,res)=>{
+router.get("/:id", (req,res)=>{
     usersViewController.getById(req,res);
+
 });
 
 
